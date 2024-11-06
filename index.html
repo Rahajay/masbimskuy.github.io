@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="id">
+  
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Permainan Tebak Kak Bima</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      padding: 20px;
+      background-color: #f2f2f2;
+    }
+
+    h1 {
+      color: #4CAF50;
+    }
+
+    button {
+      padding: 10px 20px;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      cursor: pointer;
+      margin: 10px;
+      font-size: 16px;
+    }
+
+    button:hover {
+      background-color: #45a049;
+    }
+
+    #result {
+      font-size: 18px;
+      margin-top: 20px;
+    }
+
+  </style>
+</head>
+<body>
+  <h1>Permainan Tebak Kak Bima</h1>
+  <div id="questionSection">
+    <p id="question">Siapakah kk ppk terganteng?</p>
+    <div id="buttons">
+      <button onclick="checkAnswer(1, 'Kak Bima')">Kak Bima</button>
+      <button onclick="checkAnswer(1, 'Ka Hansen')">Ka Hansen</button>
+    </div>
+  </div>
+
+  <p id="result"></p>
+
+  <script src="script.js"></script>
+  <script>
+    let currentQuestion = 1;  // Menyimpan nomor pertanyaan yang sedang dijawab
+
+    // Fungsi untuk memeriksa jawaban
+    function checkAnswer(questionNumber, userAnswer) {
+      const result = document.getElementById("result");
+
+      if (questionNumber === 1) {
+        if (userAnswer === "Kak Bima") {
+          currentQuestion = 2;
+          result.innerHTML = "Jawaban benar! Sekarang, lanjut ke pertanyaan berikut.";
+          displayNextQuestion();
+        } else {
+          result.innerHTML = "Jawaban salah. Coba lagi dari awal!";
+          resetGame();
+        }
+      } else if (questionNumber === 2) {
+        if (userAnswer === "18 April") {
+          currentQuestion = 3;
+          result.innerHTML = "Jawaban benar! Sekarang, lanjut ke pertanyaan berikut.";
+          displayNextQuestion();
+        } else {
+          result.innerHTML = "Jawaban salah. Coba lagi dari awal!";
+          resetGame();
+        }
+      } else if (questionNumber === 3) {
+        if (userAnswer === "Basket") {
+          currentQuestion = 4;
+          result.innerHTML = "Jawaban benar! Sekarang, lanjut ke pertanyaan berikut.";
+          displayNextQuestion();
+        } else {
+          result.innerHTML = "Jawaban salah. Coba lagi dari awal!";
+          resetGame();
+        }
+      } else if (questionNumber === 4) {
+        if (userAnswer === "Menjadi Programmer") {
+          result.innerHTML = "Selamat, kamu berhasil menjawab semua pertanyaan dengan benar!";
+          result.innerHTML += "<br><br>Untuk bonus, kunjungi akun TikTok: <a href='https://www.tiktok.com/@prince.rize5' target='_blank'>prince.rize5</a>";
+        } else {
+          result.innerHTML = "Jawaban salah. Coba lagi dari awal!";
+          resetGame();
+        }
+      }
+    }
+
+    // Fungsi untuk menampilkan pertanyaan berikutnya
+    function displayNextQuestion() {
+      const question = document.getElementById("question");
+      const buttons = document.getElementById("buttons");
+      buttons.innerHTML = "";  // Mengosongkan tombol sebelumnya
+
+      if (currentQuestion === 2) {
+        question.innerHTML = "Kapan kak bima berulang tahun?";
+        buttons.appendChild(createButton("18 April", 2));
+        buttons.appendChild(createButton("25 Desember", 2));
+      } else if (currentQuestion === 3) {
+        question.innerHTML = "Apa hobby kak bima?";
+        buttons.appendChild(createButton("Basket", 3));
+        buttons.appendChild(createButton("Futsal", 3));
+      } else if (currentQuestion === 4) {
+        question.innerHTML = "Apa cita-cita kak bima?";
+        buttons.appendChild(createButton("Menjadi Programmer", 4));
+        buttons.appendChild(createButton("Menjadi Guru Agama", 4));
+      }
+    }
+
+    // Fungsi untuk membuat tombol pilihan
+    function createButton(answer, questionNumber) {
+      const button = document.createElement("button");
+      button.innerHTML = answer;
+      button.onclick = function() { checkAnswer(questionNumber, answer); };
+      return button;
+    }
+
+    // Fungsi untuk mereset game ke pertanyaan pertama
+    function resetGame() {
+      currentQuestion = 1;
+      const question = document.getElementById("question");
+      const buttons = document.getElementById("buttons");
+      question.innerHTML = "Siapakah kk ppk terganteng?";
+      buttons.innerHTML = "";  // Kosongkan tombol sebelumnya
+      buttons.appendChild(createButton("Kak Bima", 1));
+      buttons.appendChild(createButton("Ka Hansen", 1));
+    }
+
+  </script>
+</body>
+</html>
